@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPERHUMAN 2.0 - 28-Day Elite Wellness Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .benefit-tag { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        .week-nav { backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <!-- Left: Logo/Title -->
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold">✅ SUPERHUMAN 2.0</h1>
+                    <p class="text-lg md:text-xl text-white/90">28-DAY ELITE WELLNESS PROGRAM</p>
+                </div>
+                
+                <!-- Center: Benefits Grid -->
+                <div class="grid grid-cols-4 gap-2 text-xs">
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">💪 MUSCLE</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">🍆 LIBIDO</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">🧠 BRAIN</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">🦴 BONES</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">🫁 LUNGS</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">✨ SKIN</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">👁️ EYES</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full text-center">💤 SLEEP</span>
+                </div>
+                
+                <!-- Right: Routine -->
+                <div class="text-center md:text-right">
+                    <div class="bg-white/20 px-4 py-2 rounded-lg">
+                        <p class="text-sm font-medium">📌 Daily Routine</p>
+                        <p class="text-xs">🥤 10AM Smoothie | 🧃 9PM Juice</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week Navigation -->
+    <div class="sticky top-0 z-50 week-nav bg-white/90 border-b border-gray-200 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-4">
+                <button onclick="showWeek(1)" class="week-btn px-6 py-2 rounded-full font-semibold transition-all bg-purple-600 text-white" data-week="1">
+                    Week 1 - Foundation
+                </button>
+                <button onclick="showWeek(2)" class="week-btn px-6 py-2 rounded-full font-semibold transition-all bg-gray-200 text-gray-700 hover:bg-purple-100" data-week="2">
+                    Week 2 - Performance
+                </button>
+                <button onclick="showWeek(3)" class="week-btn px-6 py-2 rounded-full font-semibold transition-all bg-gray-200 text-gray-700 hover:bg-purple-100" data-week="3">
+                    Week 3 - Optimization
+                </button>
+                <button onclick="showWeek(4)" class="week-btn px-6 py-2 rounded-full font-semibold transition-all bg-gray-200 text-gray-700 hover:bg-purple-100" data-week="4">
+                    Week 4 - Mastery
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 1 - Foundation -->
+    <div id="week-1" class="week-content container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 1 – FOUNDATION</h2>
+        
+        <!-- Day 1 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 1 – Sunday</h3>
+                <div class="text-sm text-gray-500">Day 1/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Morning Smoothie -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌞 Brain & Gains Smoothie</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Blueberries (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥄</span> Almond butter (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🌱</span> Maca (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Muscle</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                    </div>
+                </div>
+
+                <!-- Evening Juice -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-indigo-600 mb-4">🌙 Lung Cleanser Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Mint</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Warm water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Lungs</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Mucus repair</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Minerals</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 2 – Monday</h3>
+                <div class="text-sm text-gray-500">Day 2/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Alpha Blood Flow Smoothie</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍉</span> Watermelon (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍫</span> Cacao (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🌾</span> Oats (2tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Erections</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Liver Shield Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥕</span> Carrots (2)</div>
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Orange (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Turmeric (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🧂</span> Black pepper (pinch)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Liver</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Inflammation</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue with remaining days of Week 1 -->
+        <!-- Day 3 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 3 – Tuesday</h3>
+                <div class="text-sm text-gray-500">Day 3/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌞 Shilajit Brain Fuel</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥑</span> Avocado (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Ashwagandha (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">⚪</span> Chia seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Clarity</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Stress</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Joints</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-lime-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Detox Glow Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍏</span> Green apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Parsley</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Detox</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Kidney</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 4 – Wednesday</h3>
+                <div class="text-sm text-gray-500">Day 4/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Hard Drive Libido</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Red apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌱</span> Maca (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🧂</span> Cinnamon (pinch)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Circulation</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Deep Clean Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍏</span> Green apple (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🧂</span> ACV (1tbsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Liver</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Absorption</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 5 – Thursday</h3>
+                <div class="text-sm text-gray-500">Day 5/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-lime-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌞 Mood Charger</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥝</span> Kiwi (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Flaxseed (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Serotonin</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Mood</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Anti-Loud Detox</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Turmeric (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Warm water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Weed detox</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Inflammation</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 6 – Friday</h3>
+                <div class="text-sm text-gray-500">Day 6/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-brown-50 to-amber-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-amber-600 mb-4">🌞 Muscle Engine</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥜</span> Peanut butter (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🍫</span> Cocoa (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🌾</span> Oats (2tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Mass</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Immune Commander</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Orange (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥕</span> Carrot (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Mint</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Immunity</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Eyes</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 7 – Saturday</h3>
+                <div class="text-sm text-gray-500">Day 7/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 God Mode Brain</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Blueberries (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Kale (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Walnuts (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">⚪</span> Chia seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌱</span> Ashwagandha (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Joints</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Long Life Elixir</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Pomegranate (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Circulation</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Erections</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Anti-aging</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-8">
+            <button onclick="showWeek(2)" class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all">
+                Continue to Week 2 - Performance →
+            </button>
+        </div>
+    </div>
+
+    <!-- Week 2 - Performance (Hidden by default) -->
+    <div id="week-2" class="week-content container mx-auto px-4 py-8 hidden">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 2 – PERFORMANCE</h2>
+        
+        <!-- Day 8 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 8 – Sunday</h3>
+                <div class="text-sm text-gray-500">Day 8/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-pink-600 mb-4">🌞 Main Event – Libido Charge</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍉</span> Watermelon (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🌱</span> Fenugreek (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🍫</span> Cocoa (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut water (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Arousal</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Stamina</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Erections</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌙 Libido Recovery Elixir</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍉</span> Watermelon (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Moringa (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (1tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sleep</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 9 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 9 – Monday</h3>
+                <div class="text-sm text-gray-500">Day 9/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 Testosterone Spike</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Grapes (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Zinc</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Dopamine</span>
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-blue-600 mb-4">🌙 Breathe Easy</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Orange (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Lungs</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Oxygen</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Energy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 10 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 10 – Tuesday</h3>
+                <div class="text-sm text-gray-500">Day 10/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌞 Eye Saver</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥕</span> Carrot (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥝</span> Kiwi (1)</div>
+                        <div class="flex items-center"><span class="mr-2">⚪</span> Chia (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Vision</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Focus</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-yellow-600 mb-4">🌙 Joint Armor</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Turmeric (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🧂</span> Black pepper (pinch)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Warm water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Bones</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Joints</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Anti-inflammatory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 11 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 11 – Wednesday</h3>
+                <div class="text-sm text-gray-500">Day 11/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Energy Pulse</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Strawberries (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Brazil nuts (2)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Energy</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Skin Repair</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Orange (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Red grapes (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Collagen</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Vitamin C</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 12 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 12 – Thursday</h3>
+                <div class="text-sm text-gray-500">Day 12/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌞 Testicle Defender</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥝</span> Kiwi (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Kale (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Brazil nuts (2)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut water (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Selenium</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sperm</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌙 Sleep & Calm</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍒</span> Tart cherry (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sleep</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Recovery</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Serotonin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 13 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 13 – Friday</h3>
+                <div class="text-sm text-gray-500">Day 13/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-pink-600 mb-4">🌞 Happy Hormone</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥝</span> Kiwi (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Red apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Coconut milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Mood</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Glow</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Liver Reset</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Liver flush</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 14 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 14 – Saturday</h3>
+                <div class="text-sm text-gray-500">Day 14/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-blue-600 mb-4">🌞 Hydra-Testo</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍉</span> Watermelon (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Kale (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut water (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Hydration</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Anti-bloat</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌙 Dream Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍒</span> Tart cherry (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (½)</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sleep</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Nerve reset</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Recovery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-8">
+            <div class="space-x-4">
+                <button onclick="showWeek(1)" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-all">
+                    ← Back to Week 1
+                </button>
+                <button onclick="showWeek(3)" class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all">
+                    Week 3 - Regeneration →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 3 - Regeneration -->
+    <div id="week-3" class="week-content container mx-auto px-4 py-8 hidden">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 3 – REGENERATION</h2>
+        
+        <!-- Day 15 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 15 – Sunday</h3>
+                <div class="text-sm text-gray-500">Day 15/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌞 Curious Calm</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Strawberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Ashwagandha (½tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Focus</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Stress reset</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-lime-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Clean Burn</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Parsley</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Detox</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Weight</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Anti-bloat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 16 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 16 – Monday</h3>
+                <div class="text-sm text-gray-500">Day 16/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Ironman Fuel</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Blackberries (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Oxygen</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Strength</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Immunity</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Breath of Fire</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Warm water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Lungs</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Oxygen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 17 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 17 – Tuesday</h3>
+                <div class="text-sm text-gray-500">Day 17/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 Sunset Power</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Grapes (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Eyes</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Dopamine</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-blue-600 mb-4">🌙 Night Detox</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Mint</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Toxin flush</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 18 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 18 – Wednesday</h3>
+                <div class="text-sm text-gray-500">Day 18/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-pink-600 mb-4">🌞 Vibe Enhancer</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Strawberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Blueberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Coconut milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Walnuts (1tbsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Mood</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Antioxidants</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Skin & Lungs</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍍</span> Pineapple (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Glow</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Breathing</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 19 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 19 – Thursday</h3>
+                <div class="text-sm text-gray-500">Day 19/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Crown Flow</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Red apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">⚪</span> Chia (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut water (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sperm</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Energy</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Full Body Juice</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">System flush</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Circulation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 20 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 20 – Friday</h3>
+                <div class="text-sm text-gray-500">Day 20/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌞 Zen Strength</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍐</span> Pear (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Recovery</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Hydration</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-lime-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Final Flush</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Parsley</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Anti-bloat</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 21 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 21 – Saturday</h3>
+                <div class="text-sm text-gray-500">Day 21/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 Superhuman Roundup</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Blackberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Strawberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut water (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Recharge</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Antioxidants</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Longevity</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Longevity Elixir</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Red grapes (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Vitality</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Age reset</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Blood</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-8">
+            <div class="space-x-4">
+                <button onclick="showWeek(2)" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-all">
+                    ← Back to Week 2
+                </button>
+                <button onclick="showWeek(4)" class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all">
+                    Week 4 - Advanced Rotation →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="week-4" class="week-content container mx-auto px-4 py-8 hidden">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 4 – ADVANCED ROTATION</h2>
+        
+        <!-- Day 22 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 22 – Sunday</h3>
+                <div class="text-sm text-gray-500">Day 22/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-pink-600 mb-4">🌞 Dragonfruit Detox Fuel</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🐉</span> Pink dragonfruit (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🐉</span> White dragonfruit (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌱</span> Maca (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Gut</span>
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Soursop Sleep Flush</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍈</span> Soursop (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">💧</span> Water (½c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Antioxidants</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Parasite flush</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Sleep</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 23 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 23 – Monday</h3>
+                <div class="text-sm text-gray-500">Day 23/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 Berry Brain Surge</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🫐</span> Blueberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🫐</span> Blackberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Strawberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Grapes (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Memory</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Eyes</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Dopamine</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Red Alert Cleanse</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Red apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🫐</span> Cranberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Mint</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">UTI</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Immunity</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Metabolism</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 24 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 24 – Tuesday</h3>
+                <div class="text-sm text-gray-500">Day 24/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-brown-50 to-amber-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-amber-600 mb-4">🌞 Date Night Drive</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🌴</span> Dates (4 soaked)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍫</span> Cacao (1tsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥥</span> Coconut milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">⚪</span> Chia (1tbsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Erections</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Energy</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Fiber</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Lymph Flow</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Tangerine (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Lymph</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 25 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 25 – Wednesday</h3>
+                <div class="text-sm text-gray-500">Day 25/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-yellow-600 mb-4">🌞 Tropical Star Build</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🌟</span> Star apple (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥭</span> Mango (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍐</span> Pear (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Pumpkin seeds (1tbsp)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Testes</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Testosterone</span>
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Electrolytes</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Glucose</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-blue-600 mb-4">🌙 Cooling Cleanse</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍉</span> Watermelon (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥒</span> Cucumber (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Hydration</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Kidneys</span>
+                        <span class="benefit-tag bg-cyan-100 text-cyan-800 px-2 py-1 rounded-full text-xs">Bloating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 26 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 26 – Thursday</h3>
+                <div class="text-sm text-gray-500">Day 26/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌞 Raspberry Reset</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍓</span> Raspberries (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Red grapes (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍎</span> Red apple (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Ashwagandha (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Insulin</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Gut</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Stress</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">🌙 Iron & Glow</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🧃</span> Beetroot (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Circulation</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Oxygen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 27 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 27 – Friday</h3>
+                <div class="text-sm text-gray-500">Day 27/28</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">🌞 Juicy Plump Builder</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍑</span> Plums (2)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🥬</span> Spinach (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Oat milk (1c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌰</span> Brazil nut (1)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Muscle</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Longevity</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Brain</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-orange-600 mb-4">🌙 Fat Burner</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍊</span> Orange (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🌿</span> Moringa (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Fat burn</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Thyroid</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Hormones</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 28 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover border-4 border-gold-200" style="border-color: #ffd700;">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">📅 DAY 28 – Saturday</h3>
+                <div class="text-sm text-gray-500">Day 28/28 - FINAL DAY! 🎉</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-gold-50 to-yellow-50 rounded-xl p-5" style="background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);">
+                    <h4 class="text-xl font-bold text-yellow-600 mb-4">🌞 Final Super Combo</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍈</span> Soursop (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🐉</span> Dragonfruit (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🍇</span> Grapes (½c)</div>
+                        <div class="flex items-center"><span class="mr-2">🌴</span> Dates (2)</div>
+                        <div class="flex items-center"><span class="mr-2">🍌</span> Banana (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🥛</span> Almond milk (1c)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Libido</span>
+                        <span class="benefit-tag bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Stamina</span>
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Flush</span>
+                        <span class="benefit-tag bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Antioxidants</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5">
+                    <h4 class="text-xl font-bold text-green-600 mb-4">🌙 Glow Down</h4>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center"><span class="mr-2">🍏</span> Green apple (1)</div>
+                        <div class="flex items-center"><span class="mr-2">🍋</span> Lemon (½)</div>
+                        <div class="flex items-center"><span class="mr-2">🫚</span> Ginger (1in)</div>
+                        <div class="flex items-center"><span class="mr-2">🍯</span> Honey (½tsp)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="benefit-tag bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Gut</span>
+                        <span class="benefit-tag bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">Skin</span>
+                        <span class="benefit-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Calm</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6">
+                    <div class="text-4xl mb-2">🏆</div>
+                    <h4 class="text-xl font-bold text-purple-800 mb-2">SUPERHUMAN TRANSFORMATION COMPLETE!</h4>
+                    <p class="text-purple-600 mb-4">You've completed the full 28-day journey!</p>
+                    <div class="bg-white rounded-lg p-4 inline-block">
+                        <p class="text-sm font-semibold text-gray-800">✅ OFFICIAL MASTER COPY</p>
+                        <p class="text-sm text-gray-600">Start: Sunday Aug 17</p>
+                        <p class="text-sm text-purple-600 font-medium">🔁 Repeat 2x/month for compounding results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-8">
+            <div class="space-x-4">
+                <button onclick="showWeek(3)" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-all">
+                    ← Back to Week 3
+                </button>
+                <button onclick="showWeek(1)" class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all">
+                    🔄 Start Over - Week 1
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">🚀 Ready to Transform?</h3>
+            <p class="text-gray-300 mb-6">Follow this 28-day program for complete wellness transformation</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <span>💪 Build Muscle</span>
+                <span>🧠 Boost Brain Power</span>
+                <span>🔋 Increase Energy</span>
+                <span>✨ Glow Up</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showWeek(weekNumber) {
+            // Hide all weeks
+            document.querySelectorAll('.week-content').forEach(week => {
+                week.classList.add('hidden');
+            });
+            
+            // Show selected week
+            document.getElementById(`week-${weekNumber}`).classList.remove('hidden');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.week-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
+            });
+            
+            // Highlight active button
+            const activeBtn = document.querySelector(`[data-week="${weekNumber}"]`);
+            activeBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
+            activeBtn.classList.add('bg-purple-600', 'text-white');
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97035643e4734149',t:'MTc1NTM3MjUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
