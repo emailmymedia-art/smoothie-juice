@@ -53,9 +53,14 @@
                     <span class="bg-white/20 px-2 py-1 rounded-full text-center">💤 SLEEP</span>
                 </div>
                 
-                <div class="bg-white/20 px-3 py-2 rounded-lg">
-                    <p class="text-xs font-medium">📌 Daily Routine</p>
-                    <p class="text-xs">🥤 10AM | 🧃 9PM</p>
+                <div class="space-y-2">
+                    <div class="bg-white/20 px-3 py-2 rounded-lg">
+                        <p class="text-xs font-medium">📌 Daily Routine</p>
+                        <p class="text-xs">🥤 10AM | 🧃 9PM</p>
+                    </div>
+                    <div id="program-status" class="bg-white/20 px-3 py-2 rounded-lg">
+                        <!-- Live status will be inserted here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,10 +108,10 @@
         <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 1 – FOUNDATION</h2>
         
         <!-- Day 1 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="1">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 1 – Sunday</h3>
-                <div class="text-sm text-gray-500">Day 1/28</div>
+                <div class="text-sm text-gray-500 day-counter">Day 1/28</div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -149,10 +154,10 @@
         </div>
 
         <!-- Day 2 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="2">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 2 – Monday</h3>
-                <div class="text-sm text-gray-500">Day 2/28</div>
+                <div class="text-sm text-gray-500 day-counter">Day 2/28</div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -193,10 +198,10 @@
 
         <!-- Continue with remaining days of Week 1 -->
         <!-- Day 3 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="3">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 3 – Tuesday</h3>
-                <div class="text-sm text-gray-500">Day 3/28</div>
+                <div class="text-sm text-gray-500 day-counter">Day 3/28</div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -235,10 +240,10 @@
         </div>
 
         <!-- Day 4 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="4">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 4 – Wednesday</h3>
-                <div class="text-sm text-gray-500">Day 4/28</div>
+                <div class="text-sm text-gray-500 day-counter">Day 4/28</div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -277,10 +282,10 @@
         </div>
 
         <!-- Day 5 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="5">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 5 – Thursday</h3>
-                <div class="text-sm text-gray-500">Day 5/28</div>
+                <div class="text-sm text-gray-500 day-counter">Day 5/28</div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -1340,6 +1345,114 @@
     </footer>
 
     <script>
+        // Program start date - you can change this to your actual start date
+        const PROGRAM_START_DATE = new Date('2025-08-17'); // Change this to your start date
+        
+        function getCurrentProgramDay() {
+            const today = new Date();
+            const diffTime = today - PROGRAM_START_DATE;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            return Math.max(1, diffDays);
+        }
+        
+        function getCycleInfo(dayNumber) {
+            if (dayNumber <= 28) {
+                return {
+                    cycle: 1,
+                    dayInCycle: dayNumber,
+                    status: 'active'
+                };
+            }
+            
+            const cycleNumber = Math.floor((dayNumber - 1) / 28) + 1;
+            const dayInCycle = ((dayNumber - 1) % 28) + 1;
+            
+            return {
+                cycle: cycleNumber,
+                dayInCycle: dayInCycle,
+                status: 'continuing'
+            };
+        }
+        
+        function formatDate(date) {
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        function updateLiveDates() {
+            const currentDay = getCurrentProgramDay();
+            const cycleInfo = getCycleInfo(currentDay);
+            const today = new Date();
+            
+            // Update all day headers with live dates
+            document.querySelectorAll('[data-day]').forEach(dayElement => {
+                const dayNum = parseInt(dayElement.getAttribute('data-day'));
+                const dayDate = new Date(PROGRAM_START_DATE);
+                dayDate.setDate(dayDate.getDate() + dayNum - 1);
+                
+                const dayName = dayDate.toLocaleDateString('en-US', { weekday: 'long' });
+                const fullDate = formatDate(dayDate);
+                
+                // Check if this is today
+                const isToday = dayDate.toDateString() === today.toDateString();
+                
+                // Update the day header
+                const dayHeader = dayElement.querySelector('h3');
+                if (dayHeader) {
+                    let statusBadge = '';
+                    if (isToday) {
+                        statusBadge = ' <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">TODAY</span>';
+                    } else if (dayDate < today) {
+                        statusBadge = ' <span class="bg-gray-400 text-white px-2 py-1 rounded-full text-xs ml-2">DONE</span>';
+                    } else {
+                        statusBadge = ' <span class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs ml-2">UPCOMING</span>';
+                    }
+                    
+                    dayHeader.innerHTML = `📅 DAY ${dayNum} – ${fullDate}${statusBadge}`;
+                }
+                
+                // Update day counter
+                const dayCounter = dayElement.querySelector('.day-counter');
+                if (dayCounter) {
+                    if (currentDay > 28) {
+                        dayCounter.textContent = `Day ${dayNum}/28 - Cycle ${cycleInfo.cycle}`;
+                    } else {
+                        dayCounter.textContent = `Day ${dayNum}/28`;
+                    }
+                }
+            });
+            
+            // Update header with current program status
+            updateProgramStatus(currentDay, cycleInfo);
+        }
+        
+        function updateProgramStatus(currentDay, cycleInfo) {
+            const headerStatus = document.getElementById('program-status');
+            if (headerStatus) {
+                let statusText = '';
+                if (cycleInfo.status === 'active') {
+                    statusText = `Day ${currentDay} of 28 - First Cycle`;
+                } else {
+                    statusText = `Day ${cycleInfo.dayInCycle} of 28 - Cycle ${cycleInfo.cycle}`;
+                }
+                
+                const today = new Date();
+                const todayFormatted = formatDate(today);
+                
+                headerStatus.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-sm font-medium text-white/90">${todayFormatted}</div>
+                        <div class="text-xs text-white/80">${statusText}</div>
+                    </div>
+                `;
+            }
+        }
+        
         function showWeek(weekNumber) {
             // Hide all weeks
             document.querySelectorAll('.week-content').forEach(week => {
@@ -1363,6 +1476,14 @@
             // Smooth scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        
+        // Initialize dates when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLiveDates();
+            
+            // Update every minute to keep time current
+            setInterval(updateLiveDates, 60000);
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9703738ba733e911',t:'MTc1NTM3MzcyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97039159476363c3',t:'MTc1NTM3NDk0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
