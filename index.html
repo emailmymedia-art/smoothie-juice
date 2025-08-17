@@ -1630,8 +1630,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // Global reminder state
-        let remindersEnabled = false;
+        // Global reminder state with memory
+        let remindersEnabled = localStorage.getItem('superhuman-reminders') === 'true';
         
         // Enhanced notification system for all devices
         function toggleReminders() {
@@ -1656,6 +1656,7 @@
                         console.log('Notifications enabled!');
                         scheduleNotifications();
                         remindersEnabled = true;
+                        localStorage.setItem('superhuman-reminders', 'true');
                         updateNotificationButtons('🔔 Turn OFF Reminders', true);
                     } else if (permission === 'denied') {
                         updateNotificationButtons('❌ Blocked', false);
@@ -1668,6 +1669,7 @@
                 // Fallback for iOS/Safari - use visual reminders
                 enableVisualReminders();
                 remindersEnabled = true;
+                localStorage.setItem('superhuman-reminders', 'true');
                 updateNotificationButtons('🔔 Turn OFF Reminders', true);
             }
         }
@@ -1691,6 +1693,7 @@
             hideVisualReminder();
             
             remindersEnabled = false;
+            localStorage.setItem('superhuman-reminders', 'false');
             updateNotificationButtons('🔔 Enable Reminders', false);
         }
         
@@ -1916,11 +1919,24 @@
             updateLiveDates();
             scrollToCurrentDay();
             
-            // Don't auto-enable reminders - let user choose
+            // Restore reminder state from memory
+            if (remindersEnabled) {
+                // Check if we still have permission
+                if ('Notification' in window && Notification.permission === 'granted') {
+                    scheduleNotifications();
+                    updateNotificationButtons('🔔 Turn OFF Reminders', true);
+                } else {
+                    // Use visual reminders for iOS or if permission lost
+                    enableVisualReminders();
+                    updateNotificationButtons('🔔 Turn OFF Reminders', true);
+                }
+            } else {
+                updateNotificationButtons('🔔 Enable Reminders', false);
+            }
             
             // Update every minute to keep time current
             setInterval(updateLiveDates, 60000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970920f996624883',t:'MTc1NTQzMzI2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97092a6372464883',t:'MTc1NTQzMzY0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
