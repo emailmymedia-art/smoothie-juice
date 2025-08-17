@@ -18,7 +18,44 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3">
+    <div class="relative bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 overflow-hidden">
+        <!-- Fruit Background -->
+        <div class="absolute inset-0 opacity-20">
+            <svg viewBox="0 0 400 100" class="w-full h-full object-cover">
+                <!-- Blueberries -->
+                <circle cx="50" cy="30" r="8" fill="#4338ca" opacity="0.8"/>
+                <circle cx="45" cy="25" r="6" fill="#3730a3" opacity="0.9"/>
+                <circle cx="55" cy="35" r="7" fill="#4338ca" opacity="0.7"/>
+                
+                <!-- Orange slices -->
+                <circle cx="120" cy="40" r="12" fill="#f97316" opacity="0.6"/>
+                <path d="M108 40 L132 40 M120 28 L120 52 M114 34 L126 46 M126 34 L114 46" stroke="#fff" stroke-width="1" opacity="0.4"/>
+                
+                <!-- Strawberry -->
+                <path d="M180 25 Q175 20 170 25 Q175 35 180 40 Q185 35 190 25 Q185 20 180 25" fill="#ef4444" opacity="0.7"/>
+                <path d="M175 22 L185 22" stroke="#22c55e" stroke-width="2"/>
+                
+                <!-- Watermelon -->
+                <path d="M250 45 Q240 35 230 45 Q240 55 250 45" fill="#22c55e" opacity="0.6"/>
+                <path d="M250 45 Q240 40 230 45" fill="#ef4444" opacity="0.8"/>
+                <circle cx="235" cy="42" r="1" fill="#000" opacity="0.6"/>
+                <circle cx="245" cy="44" r="1" fill="#000" opacity="0.6"/>
+                
+                <!-- Banana -->
+                <path d="M300 20 Q310 25 320 35 Q315 40 305 35 Q295 30 300 20" fill="#fbbf24" opacity="0.7"/>
+                
+                <!-- Grapes -->
+                <circle cx="350" cy="25" r="4" fill="#8b5cf6" opacity="0.8"/>
+                <circle cx="355" cy="30" r="4" fill="#7c3aed" opacity="0.8"/>
+                <circle cx="345" cy="30" r="4" fill="#8b5cf6" opacity="0.7"/>
+                <circle cx="350" cy="35" r="4" fill="#7c3aed" opacity="0.9"/>
+                
+                <!-- Leaves scattered -->
+                <path d="M80 15 Q85 10 90 15 Q85 20 80 15" fill="#22c55e" opacity="0.5"/>
+                <path d="M200 60 Q205 55 210 60 Q205 65 200 60" fill="#16a34a" opacity="0.4"/>
+                <path d="M280 50 Q285 45 290 50 Q285 55 280 50" fill="#22c55e" opacity="0.6"/>
+            </svg>
+        </div>
         <div class="container mx-auto px-4">
             <!-- Mobile Layout -->
             <div class="block md:hidden">
@@ -32,10 +69,13 @@
                     <span class="bg-white/20 px-1 py-1 rounded text-center">✨</span>
                     <span class="bg-white/20 px-1 py-1 rounded text-center">💤</span>
                 </div>
-                <div class="text-center">
+                <div class="text-center space-y-2">
                     <div class="bg-white/20 px-3 py-1 rounded-lg inline-block">
                         <p class="text-xs">🥤 10AM | 🧃 9PM</p>
                     </div>
+                    <button id="mobile-notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-xs font-medium transition-all">
+                        🔔 Enable Reminders
+                    </button>
                 </div>
             </div>
             
@@ -61,6 +101,9 @@
                     <div id="program-status" class="bg-white/20 px-3 py-2 rounded-lg">
                         <!-- Live status will be inserted here -->
                     </div>
+                    <button id="notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full">
+                        🔔 Enable Reminders
+                    </button>
                 </div>
             </div>
         </div>
@@ -1477,13 +1520,123 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
+        // Notification system
+        function requestNotificationPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        console.log('Notifications enabled!');
+                        scheduleNotifications();
+                        updateNotificationButtons('✅ Reminders On');
+                    } else if (permission === 'denied') {
+                        updateNotificationButtons('❌ Blocked');
+                    }
+                });
+            } else {
+                updateNotificationButtons('❌ Not Supported');
+            }
+        }
+        
+        function updateNotificationButtons(text) {
+            const desktopBtn = document.getElementById('notification-btn');
+            const mobileBtn = document.getElementById('mobile-notification-btn');
+            
+            if (desktopBtn) {
+                desktopBtn.textContent = text;
+                desktopBtn.disabled = true;
+                desktopBtn.classList.add('opacity-75');
+            }
+            if (mobileBtn) {
+                mobileBtn.textContent = text;
+                mobileBtn.disabled = true;
+                mobileBtn.classList.add('opacity-75');
+            }
+        }
+        
+        function scheduleNotifications() {
+            // Clear any existing intervals
+            if (window.smoothieInterval) clearInterval(window.smoothieInterval);
+            if (window.juiceInterval) clearInterval(window.juiceInterval);
+            
+            // Schedule smoothie notification for 10 AM daily
+            window.smoothieInterval = setInterval(() => {
+                const now = new Date();
+                if (now.getHours() === 10 && now.getMinutes() === 0) {
+                    showNotification('🥤 Smoothie Time!', 'Time for your morning superhuman smoothie!');
+                }
+            }, 60000); // Check every minute
+            
+            // Schedule juice notification for 9 PM daily
+            window.juiceInterval = setInterval(() => {
+                const now = new Date();
+                if (now.getHours() === 21 && now.getMinutes() === 0) {
+                    showNotification('🧃 Juice Time!', 'Time for your evening wellness juice!');
+                }
+            }, 60000); // Check every minute
+        }
+        
+        function showNotification(title, body) {
+            if (Notification.permission === 'granted') {
+                const notification = new Notification(title, {
+                    body: body,
+                    icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiM4YjVjZjYiLz4KPHN2ZyB4PSIxNiIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+',
+                    badge: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiM4YjVjZjYiLz4KPC9zdmc+',
+                    tag: 'superhuman-reminder',
+                    requireInteraction: false,
+                    silent: false
+                });
+                
+                // Auto close after 5 seconds
+                setTimeout(() => notification.close(), 5000);
+                
+                // Handle click to open app
+                notification.onclick = () => {
+                    window.focus();
+                    notification.close();
+                };
+            }
+        }
+        
+        // Auto-scroll to current day
+        function scrollToCurrentDay() {
+            const currentDay = getCurrentProgramDay();
+            const cycleInfo = getCycleInfo(currentDay);
+            const dayInCycle = cycleInfo.dayInCycle;
+            
+            // Determine which week the current day is in
+            let weekNumber = 1;
+            if (dayInCycle >= 8 && dayInCycle <= 14) weekNumber = 2;
+            else if (dayInCycle >= 15 && dayInCycle <= 21) weekNumber = 3;
+            else if (dayInCycle >= 22 && dayInCycle <= 28) weekNumber = 4;
+            
+            // Show the correct week
+            showWeek(weekNumber);
+            
+            // Find today's day element and scroll to it
+            setTimeout(() => {
+                const todayElement = document.querySelector(`[data-day="${dayInCycle}"]`);
+                if (todayElement) {
+                    const headerHeight = 200; // Account for sticky header
+                    const elementTop = todayElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: Math.max(0, elementTop),
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+        
         // Initialize dates when page loads
         document.addEventListener('DOMContentLoaded', function() {
             updateLiveDates();
+            scrollToCurrentDay();
+            
+            // Request notification permission after a short delay
+            setTimeout(requestNotificationPermission, 2000);
             
             // Update every minute to keep time current
             setInterval(updateLiveDates, 60000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97039159476363c3',t:'MTc1NTM3NDk0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9708feaaa517640f',t:'MTc1NTQzMTg1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
