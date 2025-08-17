@@ -183,7 +183,7 @@
                     <div class="bg-white/20 px-3 py-1 rounded-lg inline-block">
                         <p class="text-xs">🥤 10AM | 🧃 9PM</p>
                     </div>
-                    <button id="mobile-notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-xs font-medium transition-all transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
+                    <button id="mobile-notification-btn" onclick="toggleReminders()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-xs font-medium transition-all transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
                         🔔 Enable Reminders
                     </button>
                 </div>
@@ -211,7 +211,7 @@
                     <div id="program-status" class="bg-white/20 px-3 py-2 rounded-lg">
                         <!-- Live status will be inserted here -->
                     </div>
-                    <button id="notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
+                    <button id="notification-btn" onclick="toggleReminders()" class="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
                         🔔 Enable Reminders
                     </button>
                 </div>
@@ -1630,7 +1630,20 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
+        // Global reminder state
+        let remindersEnabled = false;
+        
         // Enhanced notification system for all devices
+        function toggleReminders() {
+            if (remindersEnabled) {
+                // Turn OFF reminders
+                disableReminders();
+            } else {
+                // Turn ON reminders
+                requestNotificationPermission();
+            }
+        }
+        
         function requestNotificationPermission() {
             // Check if we're on iOS/Safari
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -1642,36 +1655,85 @@
                     if (permission === 'granted') {
                         console.log('Notifications enabled!');
                         scheduleNotifications();
-                        updateNotificationButtons('✅ Reminders On');
+                        remindersEnabled = true;
+                        updateNotificationButtons('🔔 Turn OFF Reminders', true);
                     } else if (permission === 'denied') {
-                        updateNotificationButtons('❌ Blocked');
+                        updateNotificationButtons('❌ Blocked', false);
                     } else {
                         // Permission pending
-                        updateNotificationButtons('⏳ Pending');
+                        updateNotificationButtons('⏳ Pending', false);
                     }
                 });
             } else {
                 // Fallback for iOS/Safari - use visual reminders
                 enableVisualReminders();
-                updateNotificationButtons('✅ Visual Reminders On');
+                remindersEnabled = true;
+                updateNotificationButtons('🔔 Turn OFF Reminders', true);
             }
         }
         
-        function updateNotificationButtons(text) {
+        function disableReminders() {
+            // Clear all intervals
+            if (window.smoothieInterval) {
+                clearInterval(window.smoothieInterval);
+                window.smoothieInterval = null;
+            }
+            if (window.juiceInterval) {
+                clearInterval(window.juiceInterval);
+                window.juiceInterval = null;
+            }
+            if (window.reminderCheckInterval) {
+                clearInterval(window.reminderCheckInterval);
+                window.reminderCheckInterval = null;
+            }
+            
+            // Hide any visible banner
+            hideVisualReminder();
+            
+            remindersEnabled = false;
+            updateNotificationButtons('🔔 Enable Reminders', false);
+        }
+        
+        function updateNotificationButtons(text, isActive = false) {
             const desktopBtn = document.getElementById('notification-btn');
             const mobileBtn = document.getElementById('mobile-notification-btn');
             
             if (desktopBtn) {
                 desktopBtn.textContent = text;
-                desktopBtn.disabled = true;
-                desktopBtn.classList.add('opacity-75');
-                desktopBtn.style.animation = 'none'; // Stop bouncing
+                desktopBtn.disabled = false; // Keep button clickable
+                
+                if (isActive) {
+                    desktopBtn.classList.remove('bg-white/20', 'hover:bg-white/30');
+                    desktopBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'text-white');
+                    desktopBtn.style.animation = 'none'; // Stop bouncing when active
+                } else {
+                    desktopBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'text-white');
+                    desktopBtn.classList.add('bg-white/20', 'hover:bg-white/30');
+                    if (text.includes('Enable')) {
+                        desktopBtn.style.animation = 'bounce 2s infinite'; // Bounce when disabled
+                    } else {
+                        desktopBtn.style.animation = 'none';
+                    }
+                }
             }
+            
             if (mobileBtn) {
                 mobileBtn.textContent = text;
-                mobileBtn.disabled = true;
-                mobileBtn.classList.add('opacity-75');
-                mobileBtn.style.animation = 'none'; // Stop bouncing
+                mobileBtn.disabled = false; // Keep button clickable
+                
+                if (isActive) {
+                    mobileBtn.classList.remove('bg-white/20', 'hover:bg-white/30');
+                    mobileBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'text-white');
+                    mobileBtn.style.animation = 'none'; // Stop bouncing when active
+                } else {
+                    mobileBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'text-white');
+                    mobileBtn.classList.add('bg-white/20', 'hover:bg-white/30');
+                    if (text.includes('Enable')) {
+                        mobileBtn.style.animation = 'bounce 2s infinite'; // Bounce when disabled
+                    } else {
+                        mobileBtn.style.animation = 'none';
+                    }
+                }
             }
         }
         
@@ -1700,7 +1762,7 @@
             }, 60000); // Check every minute
             
             // Also check every 30 seconds for near-time reminders
-            setInterval(checkUpcomingReminders, 30000);
+            window.reminderCheckInterval = setInterval(checkUpcomingReminders, 30000);
         }
         
         function scheduleNotifications() {
@@ -1854,12 +1916,11 @@
             updateLiveDates();
             scrollToCurrentDay();
             
-            // Request notification permission after a short delay
-            setTimeout(requestNotificationPermission, 2000);
+            // Don't auto-enable reminders - let user choose
             
             // Update every minute to keep time current
             setInterval(updateLiveDates, 60000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9709187170ac640f',t:'MTc1NTQzMjkxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970920f996624883',t:'MTc1NTQzMzI2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
