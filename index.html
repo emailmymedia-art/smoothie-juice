@@ -8,55 +8,165 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .benefit-tag { animation: pulse 2s infinite; }
+        .gradient-bg { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .card-hover { 
+            transition: all 0.3s ease; 
+            animation: float 6s ease-in-out infinite;
+        }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .benefit-tag { 
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+        .benefit-tag:hover { transform: scale(1.1); }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
         .week-nav { backdrop-filter: blur(10px); }
+        .fruit-float { animation: fruitFloat 8s ease-in-out infinite; }
+        @keyframes fruitFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(1deg); }
+            75% { transform: translateY(5px) rotate(-1deg); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
-    <div class="relative bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 overflow-hidden">
-        <!-- Fruit Background -->
-        <div class="absolute inset-0 opacity-20">
-            <svg viewBox="0 0 400 100" class="w-full h-full object-cover">
-                <!-- Blueberries -->
-                <circle cx="50" cy="30" r="8" fill="#4338ca" opacity="0.8"/>
-                <circle cx="45" cy="25" r="6" fill="#3730a3" opacity="0.9"/>
-                <circle cx="55" cy="35" r="7" fill="#4338ca" opacity="0.7"/>
+    <div class="relative text-white py-3 overflow-hidden backdrop-blur-sm" style="background: linear-gradient(45deg, rgba(139, 92, 246, 0.4), rgba(79, 70, 229, 0.4), rgba(168, 85, 247, 0.4)); background-size: 400% 400%; animation: gradientShift 6s ease infinite;">
+        <!-- Fruit Background - Behind text -->
+        <div class="absolute inset-0 opacity-60 z-0">
+            <svg viewBox="0 0 800 100" class="w-full h-full object-cover fruit-float">
+                <!-- Blueberries cluster -->
+                <circle cx="50" cy="30" r="8" fill="#4338ca" opacity="0.9"/>
+                <circle cx="45" cy="25" r="6" fill="#3730a3" opacity="0.8"/>
+                <circle cx="55" cy="35" r="7" fill="#4338ca" opacity="0.8"/>
+                <circle cx="60" cy="28" r="5" fill="#312e81" opacity="0.9"/>
                 
                 <!-- Orange slices -->
-                <circle cx="120" cy="40" r="12" fill="#f97316" opacity="0.6"/>
-                <path d="M108 40 L132 40 M120 28 L120 52 M114 34 L126 46 M126 34 L114 46" stroke="#fff" stroke-width="1" opacity="0.4"/>
+                <circle cx="120" cy="40" r="12" fill="#f97316" opacity="0.8"/>
+                <path d="M108 40 L132 40 M120 28 L120 52 M114 34 L126 46 M126 34 L114 46" stroke="#fff" stroke-width="1" opacity="0.6"/>
                 
                 <!-- Strawberry -->
-                <path d="M180 25 Q175 20 170 25 Q175 35 180 40 Q185 35 190 25 Q185 20 180 25" fill="#ef4444" opacity="0.7"/>
+                <path d="M180 25 Q175 20 170 25 Q175 35 180 40 Q185 35 190 25 Q185 20 180 25" fill="#ef4444" opacity="0.8"/>
                 <path d="M175 22 L185 22" stroke="#22c55e" stroke-width="2"/>
+                <circle cx="177" cy="30" r="1" fill="#fbbf24" opacity="0.8"/>
+                <circle cx="183" cy="32" r="1" fill="#fbbf24" opacity="0.8"/>
                 
-                <!-- Watermelon -->
-                <path d="M250 45 Q240 35 230 45 Q240 55 250 45" fill="#22c55e" opacity="0.6"/>
-                <path d="M250 45 Q240 40 230 45" fill="#ef4444" opacity="0.8"/>
-                <circle cx="235" cy="42" r="1" fill="#000" opacity="0.6"/>
-                <circle cx="245" cy="44" r="1" fill="#000" opacity="0.6"/>
+                <!-- Watermelon slice -->
+                <path d="M250 45 Q240 35 230 45 Q240 55 250 45" fill="#22c55e" opacity="0.8"/>
+                <path d="M250 45 Q240 40 230 45" fill="#ef4444" opacity="0.9"/>
+                <circle cx="235" cy="42" r="1" fill="#000" opacity="0.8"/>
+                <circle cx="245" cy="44" r="1" fill="#000" opacity="0.8"/>
+                <circle cx="240" cy="46" r="1" fill="#000" opacity="0.7"/>
                 
                 <!-- Banana -->
-                <path d="M300 20 Q310 25 320 35 Q315 40 305 35 Q295 30 300 20" fill="#fbbf24" opacity="0.7"/>
+                <path d="M300 20 Q310 25 320 35 Q315 40 305 35 Q295 30 300 20" fill="#fbbf24" opacity="0.8"/>
+                <path d="M302 22 Q308 26 315 32" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
                 
-                <!-- Grapes -->
-                <circle cx="350" cy="25" r="4" fill="#8b5cf6" opacity="0.8"/>
+                <!-- Purple grapes cluster -->
+                <circle cx="350" cy="25" r="4" fill="#8b5cf6" opacity="0.9"/>
                 <circle cx="355" cy="30" r="4" fill="#7c3aed" opacity="0.8"/>
-                <circle cx="345" cy="30" r="4" fill="#8b5cf6" opacity="0.7"/>
+                <circle cx="345" cy="30" r="4" fill="#8b5cf6" opacity="0.8"/>
                 <circle cx="350" cy="35" r="4" fill="#7c3aed" opacity="0.9"/>
+                <circle cx="358" cy="35" r="3" fill="#6d28d9" opacity="0.8"/>
                 
-                <!-- Leaves scattered -->
-                <path d="M80 15 Q85 10 90 15 Q85 20 80 15" fill="#22c55e" opacity="0.5"/>
-                <path d="M200 60 Q205 55 210 60 Q205 65 200 60" fill="#16a34a" opacity="0.4"/>
-                <path d="M280 50 Q285 45 290 50 Q285 55 280 50" fill="#22c55e" opacity="0.6"/>
+                <!-- Mango -->
+                <ellipse cx="420" cy="35" rx="10" ry="8" fill="#f59e0b" opacity="0.8"/>
+                <path d="M415 30 Q420 25 425 30" stroke="#f97316" stroke-width="1" opacity="0.6"/>
+                
+                <!-- Kiwi slice -->
+                <circle cx="480" cy="40" r="8" fill="#84cc16" opacity="0.7"/>
+                <circle cx="480" cy="40" r="5" fill="#fef3c7" opacity="0.8"/>
+                <circle cx="480" cy="40" r="2" fill="#fff" opacity="0.9"/>
+                <path d="M475 40 L485 40 M480 35 L480 45" stroke="#22c55e" stroke-width="0.5" opacity="0.6"/>
+                
+                <!-- Pineapple -->
+                <ellipse cx="540" cy="45" rx="6" ry="10" fill="#f59e0b" opacity="0.8"/>
+                <path d="M535 35 L545 35 M537 32 L543 32 M539 29 L541 29" stroke="#22c55e" stroke-width="2" opacity="0.7"/>
+                <path d="M535 40 L545 40 M536 43 L544 43 M537 46 L543 46" stroke="#f97316" stroke-width="0.5" opacity="0.6"/>
+                
+                <!-- Beetroot -->
+                <circle cx="600" cy="35" r="8" fill="#dc2626" opacity="0.8"/>
+                <path d="M595 27 Q600 22 605 27" stroke="#22c55e" stroke-width="2" opacity="0.7"/>
+                
+                <!-- Avocado -->
+                <ellipse cx="660" cy="40" rx="7" ry="10" fill="#22c55e" opacity="0.8"/>
+                <circle cx="660" cy="40" r="4" fill="#fbbf24" opacity="0.7"/>
+                <circle cx="660" cy="40" r="2" fill="#a3a3a3" opacity="0.8"/>
+                
+                <!-- Carrots -->
+                <path d="M720 50 Q715 40 710 50" fill="#f97316" opacity="0.8"/>
+                <path d="M725 48 Q720 38 715 48" fill="#f97316" opacity="0.7"/>
+                <path d="M712 35 L718 35 M720 33 L726 33" stroke="#22c55e" stroke-width="1" opacity="0.7"/>
+                
+                <!-- Red grapes -->
+                <circle cx="780" cy="25" r="4" fill="#dc2626" opacity="0.9"/>
+                <circle cx="785" cy="30" r="4" fill="#b91c1c" opacity="0.8"/>
+                <circle cx="775" cy="30" r="4" fill="#dc2626" opacity="0.8"/>
+                <circle cx="780" cy="35" r="4" fill="#b91c1c" opacity="0.9"/>
+                
+                <!-- Cucumber slices -->
+                <circle cx="100" cy="70" r="6" fill="#22c55e" opacity="0.7"/>
+                <circle cx="100" cy="70" r="4" fill="#dcfce7" opacity="0.8"/>
+                <circle cx="100" cy="70" r="2" fill="#fff" opacity="0.6"/>
+                
+                <!-- Apple -->
+                <circle cx="200" cy="75" r="8" fill="#ef4444" opacity="0.8"/>
+                <path d="M195 67 Q200 62 205 67" stroke="#22c55e" stroke-width="2" opacity="0.7"/>
+                <path d="M198 65 Q200 63 202 65" stroke="#16a34a" stroke-width="1" opacity="0.6"/>
+                
+                <!-- Lemon -->
+                <ellipse cx="320" cy="75" rx="6" ry="8" fill="#fbbf24" opacity="0.8"/>
+                <path d="M315 70 Q320 65 325 70" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+                
+                <!-- Ginger root -->
+                <path d="M400 70 Q405 65 410 70 Q415 75 420 70 Q425 65 430 70" fill="#f59e0b" opacity="0.8"/>
+                
+                <!-- Spinach leaves -->
+                <path d="M500 75 Q505 70 510 75 Q505 80 500 75" fill="#22c55e" opacity="0.8"/>
+                <path d="M505 72 Q508 70 511 72" stroke="#16a34a" stroke-width="0.5" opacity="0.6"/>
+                
+                <!-- Pomegranate -->
+                <circle cx="580" cy="75" r="7" fill="#dc2626" opacity="0.8"/>
+                <circle cx="577" cy="72" r="1" fill="#fbbf24" opacity="0.9"/>
+                <circle cx="583" cy="78" r="1" fill="#fbbf24" opacity="0.9"/>
+                <circle cx="580" cy="75" r="1" fill="#fbbf24" opacity="0.8"/>
+                
+                <!-- Coconut -->
+                <circle cx="680" cy="70" r="8" fill="#a3a3a3" opacity="0.7"/>
+                <circle cx="677" cy="67" r="1" fill="#000" opacity="0.8"/>
+                <circle cx="683" cy="67" r="1" fill="#000" opacity="0.8"/>
+                <path d="M680 72 Q678 74 682 74" stroke="#000" stroke-width="1" opacity="0.6"/>
+                
+                <!-- More scattered leaves and herbs -->
+                <path d="M80 15 Q85 10 90 15 Q85 20 80 15" fill="#22c55e" opacity="0.6"/>
+                <path d="M260 15 Q265 10 270 15 Q265 20 260 15" fill="#16a34a" opacity="0.5"/>
+                <path d="M440 15 Q445 10 450 15 Q445 20 440 15" fill="#22c55e" opacity="0.6"/>
+                <path d="M620 15 Q625 10 630 15 Q625 20 620 15" fill="#16a34a" opacity="0.5"/>
+                <path d="M160 85 Q165 80 170 85 Q165 90 160 85" fill="#22c55e" opacity="0.5"/>
+                <path d="M360 85 Q365 80 370 85 Q365 90 360 85" fill="#16a34a" opacity="0.6"/>
+                <path d="M560 85 Q565 80 570 85 Q565 90 560 85" fill="#22c55e" opacity="0.5"/>
+                <path d="M740 85 Q745 80 750 85 Q745 90 740 85" fill="#16a34a" opacity="0.6"/>
             </svg>
         </div>
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 relative z-10">
             <!-- Mobile Layout -->
             <div class="block md:hidden">
                 <div class="text-center mb-2">
@@ -73,7 +183,7 @@
                     <div class="bg-white/20 px-3 py-1 rounded-lg inline-block">
                         <p class="text-xs">🥤 10AM | 🧃 9PM</p>
                     </div>
-                    <button id="mobile-notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-xs font-medium transition-all">
+                    <button id="mobile-notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-xs font-medium transition-all transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
                         🔔 Enable Reminders
                     </button>
                 </div>
@@ -101,7 +211,7 @@
                     <div id="program-status" class="bg-white/20 px-3 py-2 rounded-lg">
                         <!-- Live status will be inserted here -->
                     </div>
-                    <button id="notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full">
+                    <button id="notification-btn" onclick="requestNotificationPermission()" class="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full transform hover:scale-105 active:scale-95" style="animation: bounce 2s infinite;">
                         🔔 Enable Reminders
                     </button>
                 </div>
@@ -151,7 +261,7 @@
         <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">🗓️ WEEK 1 – FOUNDATION</h2>
         
         <!-- Day 1 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="1">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="1" style="animation-delay: 0s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 1 – Sunday</h3>
                 <div class="text-sm text-gray-500 day-counter">Day 1/28</div>
@@ -197,7 +307,7 @@
         </div>
 
         <!-- Day 2 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="2">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="2" style="animation-delay: 0.5s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 2 – Monday</h3>
                 <div class="text-sm text-gray-500 day-counter">Day 2/28</div>
@@ -241,7 +351,7 @@
 
         <!-- Continue with remaining days of Week 1 -->
         <!-- Day 3 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="3">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="3" style="animation-delay: 1s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 3 – Tuesday</h3>
                 <div class="text-sm text-gray-500 day-counter">Day 3/28</div>
@@ -283,7 +393,7 @@
         </div>
 
         <!-- Day 4 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="4">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="4" style="animation-delay: 1.5s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 4 – Wednesday</h3>
                 <div class="text-sm text-gray-500 day-counter">Day 4/28</div>
@@ -325,7 +435,7 @@
         </div>
 
         <!-- Day 5 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="5">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" data-day="5" style="animation-delay: 2s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 5 – Thursday</h3>
                 <div class="text-sm text-gray-500 day-counter">Day 5/28</div>
@@ -368,7 +478,7 @@
         </div>
 
         <!-- Day 6 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" style="animation-delay: 2.5s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 6 – Friday</h3>
                 <div class="text-sm text-gray-500">Day 6/28</div>
@@ -410,7 +520,7 @@
         </div>
 
         <!-- Day 7 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover" style="animation-delay: 3s;">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-purple-600">📅 DAY 7 – Saturday</h3>
                 <div class="text-sm text-gray-500">Day 7/28</div>
@@ -1638,5 +1748,5 @@
             setInterval(updateLiveDates, 60000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9708feaaa517640f',t:'MTc1NTQzMTg1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97090fc486a4640f',t:'MTc1NTQzMjU1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
