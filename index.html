@@ -1497,446 +1497,211 @@
         </div>
     </footer>
 
-    <script>
-        // Program start date - you can change this to your actual start date
-        const PROGRAM_START_DATE = new Date('2025-08-17'); // Change this to your start date
-        
-        function getCurrentProgramDay() {
-            const today = new Date();
-            const diffTime = today - PROGRAM_START_DATE;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-            return Math.max(1, diffDays);
+   <script>
+/* ===========================
+   SUPERHUMAN Smoothie/Juice — Day/Week Fix Patch
+   Drop this AFTER your existing script.
+   =========================== */
+
+(function () {
+  // If your page already defines PROGRAM_START_DATE, reuse it; otherwise set here.
+  const START = (typeof PROGRAM_START_DATE !== 'undefined')
+    ? PROGRAM_START_DATE
+    : new Date('2025-08-17');
+
+  // Helpers
+  const todayDate = () => new Date();
+  const toDateOnly = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const daysBetween = (a, b) => Math.floor((toDateOnly(b) - toDateOnly(a)) / (1000*60*60*24));
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+
+  function getCurrentProgramDay() {
+    const diffDays = daysBetween(START, todayDate()) + 1; // Day 1 = start date
+    return clamp(diffDays, 1, 10_000);
+  }
+
+  function dayToCycle(day) {
+    const cycle = Math.floor((day - 1) / 28) + 1;
+    const dayInCycle = ((day - 1) % 28) + 1;
+    return { cycle, dayInCycle };
+  }
+
+  function formatFullDate(d) {
+    return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  // 1) Backfill missing data-day by reading “DAY N – …” from <h3>
+  function backfillDataDay() {
+    const dayCards = document.querySelectorAll('.card-hover');
+    dayCards.forEach(el => {
+      const h3 = el.querySelector('h3');
+      if (!h3) return;
+      const m = /DAY\s+(\d+)/i.exec(h3.textContent);
+      if (!m) return;
+      const n = parseInt(m[1], 10);
+      if (!el.hasAttribute('data-day')) el.setAttribute('data-day', String(n));
+    });
+  }
+
+  // 2) Update headers (TODAY/DONE/UPCOMING) and day counters using real calendar dates
+  function applyLiveDates() {
+    const now = todayDate();
+    const currentProgramDay = getCurrentProgramDay();
+    const { cycle } = dayToCycle(currentProgramDay);
+
+    document.querySelectorAll('[data-day]').forEach(dayEl => {
+      const dayNum = parseInt(dayEl.getAttribute('data-day'), 10);
+      const dayDate = new Date(START);
+      dayDate.setDate(START.getDate() + (dayNum - 1));
+
+      const h3 = dayEl.querySelector('h3');
+      if (h3) {
+        let badge = '';
+        const dayOnly = toDateOnly(dayDate).getTime();
+        const todayOnly = toDateOnly(now).getTime();
+        if (dayOnly === todayOnly) {
+          badge = ' <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">TODAY</span>';
+        } else if (dayDate < now) {
+          badge = ' <span class="bg-gray-400 text-white px-2 py-1 rounded-full text-xs ml-2">DONE</span>';
+        } else {
+          badge = ' <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs ml-2">UPCOMING</span>';
         }
-        
-        function getCycleInfo(dayNumber) {
-            if (dayNumber <= 28) {
-                return {
-                    cycle: 1,
-                    dayInCycle: dayNumber,
-                    status: 'active'
-                };
-            }
-            
-            const cycleNumber = Math.floor((dayNumber - 1) / 28) + 1;
-            const dayInCycle = ((dayNumber - 1) % 28) + 1;
-            
-            return {
-                cycle: cycleNumber,
-                dayInCycle: dayInCycle,
-                status: 'continuing'
-            };
+        h3.innerHTML = `📅 DAY ${dayNum} – ${formatFullDate(dayDate)}${badge}`;
+      }
+
+      const counter = dayEl.querySelector('.day-counter');
+      if (counter) {
+        if (currentProgramDay > 28) {
+          counter.textContent = `Day ${dayNum}/28 - Cycle ${cycle}`;
+        } else {
+          counter.textContent = `Day ${dayNum}/28`;
         }
-        
-        function formatDate(date) {
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            return date.toLocaleDateString('en-US', options);
-        }
-        
-        function updateLiveDates() {
-            const currentDay = getCurrentProgramDay();
-            const cycleInfo = getCycleInfo(currentDay);
-            const today = new Date();
-            
-            // Update all day headers with live dates
-            document.querySelectorAll('[data-day]').forEach(dayElement => {
-                const dayNum = parseInt(dayElement.getAttribute('data-day'));
-                const dayDate = new Date(PROGRAM_START_DATE);
-                dayDate.setDate(dayDate.getDate() + dayNum - 1);
-                
-                const dayName = dayDate.toLocaleDateString('en-US', { weekday: 'long' });
-                const fullDate = formatDate(dayDate);
-                
-                // Check if this is today
-                const isToday = dayDate.toDateString() === today.toDateString();
-                
-                // Update the day header
-                const dayHeader = dayElement.querySelector('h3');
-                if (dayHeader) {
-                    let statusBadge = '';
-                    if (isToday) {
-                        statusBadge = ' <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">TODAY</span>';
-                    } else if (dayDate < today) {
-                        statusBadge = ' <span class="bg-gray-400 text-white px-2 py-1 rounded-full text-xs ml-2">DONE</span>';
-                    } else {
-                        statusBadge = ' <span class="bg-blue-400 text-white px-2 py-1 rounded-full text-xs ml-2">UPCOMING</span>';
-                    }
-                    
-                    dayHeader.innerHTML = `📅 DAY ${dayNum} – ${fullDate}${statusBadge}`;
-                }
-                
-                // Update day counter
-                const dayCounter = dayElement.querySelector('.day-counter');
-                if (dayCounter) {
-                    if (currentDay > 28) {
-                        dayCounter.textContent = `Day ${dayNum}/28 - Cycle ${cycleInfo.cycle}`;
-                    } else {
-                        dayCounter.textContent = `Day ${dayNum}/28`;
-                    }
-                }
-            });
-            
-            // Update header with current program status
-            updateProgramStatus(currentDay, cycleInfo);
-        }
-        
-        function updateProgramStatus(currentDay, cycleInfo) {
-            const headerStatus = document.getElementById('program-status');
-            if (headerStatus) {
-                let statusText = '';
-                if (cycleInfo.status === 'active') {
-                    statusText = `Day ${currentDay} of 28 - First Cycle`;
-                } else {
-                    statusText = `Day ${cycleInfo.dayInCycle} of 28 - Cycle ${cycleInfo.cycle}`;
-                }
-                
-                const today = new Date();
-                const todayFormatted = formatDate(today);
-                
-                headerStatus.innerHTML = `
-                    <div class="text-center">
-                        <div class="text-sm font-medium text-white/90">${todayFormatted}</div>
-                        <div class="text-xs text-white/80">${statusText}</div>
-                    </div>
-                `;
-            }
-        }
-        
-        function showWeek(weekNumber) {
-            // Hide all weeks
-            document.querySelectorAll('.week-content').forEach(week => {
-                week.classList.add('hidden');
-            });
-            
-            // Show selected week
-            document.getElementById(`week-${weekNumber}`).classList.remove('hidden');
-            
-            // Update navigation buttons
-            document.querySelectorAll('.week-btn').forEach(btn => {
-                btn.classList.remove('bg-purple-600', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
-            });
-            
-            // Highlight active button
-            const activeBtn = document.querySelector(`[data-week="${weekNumber}"]`);
-            activeBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
-            activeBtn.classList.add('bg-purple-600', 'text-white');
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        // Global reminder state with memory
-        let remindersEnabled = localStorage.getItem('superhuman-reminders') === 'true';
-        
-        // Enhanced notification system for all devices
-        function toggleReminders() {
-            if (remindersEnabled) {
-                // Turn OFF reminders
-                disableReminders();
-            } else {
-                // Turn ON reminders
-                requestNotificationPermission();
-            }
-        }
-        
-        function requestNotificationPermission() {
-            // Check if we're on iOS/Safari
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            
-            if ('Notification' in window && !isIOS) {
-                // Standard notification for Android/Desktop
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        console.log('Notifications enabled!');
-                        scheduleNotifications();
-                        remindersEnabled = true;
-                        localStorage.setItem('superhuman-reminders', 'true');
-                        updateNotificationButtons('🔔 Turn OFF Reminders', true);
-                    } else if (permission === 'denied') {
-                        updateNotificationButtons('❌ Blocked', false);
-                    } else {
-                        // Permission pending
-                        updateNotificationButtons('⏳ Pending', false);
-                    }
-                });
-            } else {
-                // Fallback for iOS/Safari - use visual reminders
-                enableVisualReminders();
-                remindersEnabled = true;
-                localStorage.setItem('superhuman-reminders', 'true');
-                updateNotificationButtons('🔔 Turn OFF Reminders', true);
-            }
-        }
-        
-        function disableReminders() {
-            // Clear all intervals
-            if (window.smoothieInterval) {
-                clearInterval(window.smoothieInterval);
-                window.smoothieInterval = null;
-            }
-            if (window.juiceInterval) {
-                clearInterval(window.juiceInterval);
-                window.juiceInterval = null;
-            }
-            if (window.reminderCheckInterval) {
-                clearInterval(window.reminderCheckInterval);
-                window.reminderCheckInterval = null;
-            }
-            
-            // Hide any visible banner
-            hideVisualReminder();
-            
-            remindersEnabled = false;
-            localStorage.setItem('superhuman-reminders', 'false');
-            updateNotificationButtons('🔔 Enable Reminders', false);
-        }
-        
-        function updateNotificationButtons(text, isActive = false) {
-            const desktopBtn = document.getElementById('notification-btn');
-            const mobileBtn = document.getElementById('mobile-notification-btn');
-            
-            if (desktopBtn) {
-                desktopBtn.textContent = text;
-                desktopBtn.disabled = false; // Keep button clickable
-                
-                if (isActive) {
-                    desktopBtn.classList.remove('bg-white/20', 'hover:bg-white/30');
-                    desktopBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'text-white');
-                    desktopBtn.style.animation = 'none'; // Stop bouncing when active
-                } else {
-                    desktopBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'text-white');
-                    desktopBtn.classList.add('bg-white/20', 'hover:bg-white/30');
-                    if (text.includes('Enable')) {
-                        desktopBtn.style.animation = 'bounce 2s infinite'; // Bounce when disabled
-                    } else {
-                        desktopBtn.style.animation = 'none';
-                    }
-                }
-            }
-            
-            if (mobileBtn) {
-                mobileBtn.textContent = text;
-                mobileBtn.disabled = false; // Keep button clickable
-                
-                if (isActive) {
-                    mobileBtn.classList.remove('bg-white/20', 'hover:bg-white/30');
-                    mobileBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'text-white');
-                    mobileBtn.style.animation = 'none'; // Stop bouncing when active
-                } else {
-                    mobileBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'text-white');
-                    mobileBtn.classList.add('bg-white/20', 'hover:bg-white/30');
-                    if (text.includes('Enable')) {
-                        mobileBtn.style.animation = 'bounce 2s infinite'; // Bounce when disabled
-                    } else {
-                        mobileBtn.style.animation = 'none';
-                    }
-                }
-            }
-        }
-        
-        function enableVisualReminders() {
-            // Clear any existing intervals
-            if (window.smoothieInterval) clearInterval(window.smoothieInterval);
-            if (window.juiceInterval) clearInterval(window.juiceInterval);
-            
-            // Create visual reminder banner
-            createReminderBanner();
-            
-            // Schedule smoothie reminder for 10 AM daily
-            window.smoothieInterval = setInterval(() => {
-                const now = new Date();
-                if (now.getHours() === 10 && now.getMinutes() === 0) {
-                    showVisualReminder('🥤 Smoothie Time!', 'Time for your morning superhuman smoothie!', '#f59e0b');
-                }
-            }, 60000); // Check every minute
-            
-            // Schedule juice reminder for 9 PM daily
-            window.juiceInterval = setInterval(() => {
-                const now = new Date();
-                if (now.getHours() === 21 && now.getMinutes() === 0) {
-                    showVisualReminder('🧃 Juice Time!', 'Time for your evening wellness juice!', '#8b5cf6');
-                }
-            }, 60000); // Check every minute
-            
-            // Also check every 30 seconds for near-time reminders
-            window.reminderCheckInterval = setInterval(checkUpcomingReminders, 30000);
-        }
-        
-        function scheduleNotifications() {
-            // Clear any existing intervals
-            if (window.smoothieInterval) clearInterval(window.smoothieInterval);
-            if (window.juiceInterval) clearInterval(window.juiceInterval);
-            
-            // Schedule smoothie notification for 10 AM daily
-            window.smoothieInterval = setInterval(() => {
-                const now = new Date();
-                if (now.getHours() === 10 && now.getMinutes() === 0) {
-                    showNotification('🥤 Smoothie Time!', 'Time for your morning superhuman smoothie!');
-                }
-            }, 60000); // Check every minute
-            
-            // Schedule juice notification for 9 PM daily
-            window.juiceInterval = setInterval(() => {
-                const now = new Date();
-                if (now.getHours() === 21 && now.getMinutes() === 0) {
-                    showNotification('🧃 Juice Time!', 'Time for your evening wellness juice!');
-                }
-            }, 60000); // Check every minute
-        }
-        
-        function createReminderBanner() {
-            // Create a fixed banner for visual reminders
-            const banner = document.createElement('div');
-            banner.id = 'reminder-banner';
-            banner.className = 'fixed top-0 left-0 right-0 z-50 transform -translate-y-full transition-transform duration-500 ease-in-out';
-            banner.style.display = 'none';
-            document.body.appendChild(banner);
-        }
-        
-        function showVisualReminder(title, message, color) {
-            const banner = document.getElementById('reminder-banner');
-            if (!banner) return;
-            
-            banner.innerHTML = `
-                <div class="px-4 py-3 text-white text-center shadow-lg" style="background: ${color};">
-                    <div class="flex items-center justify-between max-w-4xl mx-auto">
-                        <div class="flex items-center space-x-3">
-                            <div class="text-2xl animate-bounce">${title.includes('🥤') ? '🥤' : '🧃'}</div>
-                            <div>
-                                <div class="font-bold text-lg">${title}</div>
-                                <div class="text-sm opacity-90">${message}</div>
-                            </div>
-                        </div>
-                        <button onclick="hideVisualReminder()" class="text-white hover:text-gray-200 text-xl font-bold">×</button>
-                    </div>
-                </div>
-            `;
-            
-            // Show banner with animation
-            banner.style.display = 'block';
-            setTimeout(() => {
-                banner.classList.remove('-translate-y-full');
-            }, 100);
-            
-            // Auto hide after 10 seconds
-            setTimeout(() => {
-                hideVisualReminder();
-            }, 10000);
-            
-            // Play a subtle sound if possible
-            try {
-                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
-                audio.volume = 0.1;
-                audio.play().catch(() => {}); // Ignore errors if audio fails
-            } catch (e) {}
-        }
-        
-        function hideVisualReminder() {
-            const banner = document.getElementById('reminder-banner');
-            if (banner) {
-                banner.classList.add('-translate-y-full');
-                setTimeout(() => {
-                    banner.style.display = 'none';
-                }, 500);
-            }
-        }
-        
-        function checkUpcomingReminders() {
-            const now = new Date();
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
-            
-            // Show 5-minute warning for smoothie (9:55 AM)
-            if (currentHour === 9 && currentMinute === 55) {
-                showVisualReminder('⏰ 5 Minutes!', 'Smoothie time in 5 minutes - get ready!', '#f59e0b');
-            }
-            
-            // Show 5-minute warning for juice (8:55 PM)
-            if (currentHour === 20 && currentMinute === 55) {
-                showVisualReminder('⏰ 5 Minutes!', 'Juice time in 5 minutes - get ready!', '#8b5cf6');
-            }
-        }
-        
-        function showNotification(title, body) {
-            if (Notification.permission === 'granted') {
-                const notification = new Notification(title, {
-                    body: body,
-                    icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiM4YjVjZjYiLz4KPHN2ZyB4PSIxNiIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+',
-                    badge: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiM4YjVjZjYiLz4KPC9zdmc+',
-                    tag: 'superhuman-reminder',
-                    requireInteraction: false,
-                    silent: false
-                });
-                
-                // Auto close after 5 seconds
-                setTimeout(() => notification.close(), 5000);
-                
-                // Handle click to open app
-                notification.onclick = () => {
-                    window.focus();
-                    notification.close();
-                };
-            }
-        }
-        
-        // Auto-scroll to current day
-        function scrollToCurrentDay() {
-            const currentDay = getCurrentProgramDay();
-            const cycleInfo = getCycleInfo(currentDay);
-            const dayInCycle = cycleInfo.dayInCycle;
-            
-            // Determine which week the current day is in
-            let weekNumber = 1;
-            if (dayInCycle >= 8 && dayInCycle <= 14) weekNumber = 2;
-            else if (dayInCycle >= 15 && dayInCycle <= 21) weekNumber = 3;
-            else if (dayInCycle >= 22 && dayInCycle <= 28) weekNumber = 4;
-            
-            // Show the correct week
-            showWeek(weekNumber);
-            
-            // Find today's day element and scroll to it
-            setTimeout(() => {
-                const todayElement = document.querySelector(`[data-day="${dayInCycle}"]`);
-                if (todayElement) {
-                    const headerHeight = 200; // Account for sticky header
-                    const elementTop = todayElement.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: Math.max(0, elementTop),
-                        behavior: 'smooth'
-                    });
-                }
-            }, 100);
-        }
-        
-        // Initialize dates when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            updateLiveDates();
-            scrollToCurrentDay();
-            
-            // Restore reminder state from memory
-            if (remindersEnabled) {
-                // Check if we still have permission
-                if ('Notification' in window && Notification.permission === 'granted') {
-                    scheduleNotifications();
-                    updateNotificationButtons('🔔 Turn OFF Reminders', true);
-                } else {
-                    // Use visual reminders for iOS or if permission lost
-                    enableVisualReminders();
-                    updateNotificationButtons('🔔 Turn OFF Reminders', true);
-                }
-            } else {
-                updateNotificationButtons('🔔 Enable Reminders', false);
-            }
-            
-            // Update every minute to keep time current
-            setInterval(updateLiveDates, 60000);
-        });
-    </script>
+      }
+    });
+
+    // Header mini-status (if present)
+    const statusBox = document.getElementById('program-status');
+    if (statusBox) {
+      const { cycle, dayInCycle } = dayToCycle(currentProgramDay);
+      const statusText = (currentProgramDay <= 28)
+        ? `Day ${currentProgramDay} of 28 - First Cycle`
+        : `Day ${dayInCycle} of 28 - Cycle ${cycle}`;
+      statusBox.innerHTML = `
+        <div class="text-center">
+          <div class="text-sm font-medium text-white/90">${formatFullDate(now)}</div>
+          <div class="text-xs text-white/80">${statusText}</div>
+        </div>
+      `;
+    }
+  }
+
+  // 3) Pick week from day (1–7: W1, 8–14: W2, 15–21: W3, 22–28: W4)
+  function weekFromDay(dayInCycle) {
+    return Math.ceil(dayInCycle / 7);
+  }
+
+  // 4) Show a week (respects existing CSS/classes)
+  function showWeekSafe(weekNumber) {
+    // Hide all week sections
+    document.querySelectorAll('.week-content').forEach(w => w.classList.add('hidden'));
+    const section = document.getElementById(`week-${weekNumber}`);
+    if (section) section.classList.remove('hidden');
+
+    // Toggle nav buttons
+    document.querySelectorAll('.week-btn').forEach(btn => {
+      btn.classList.remove('bg-purple-600', 'text-white');
+      btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
+    });
+    const activeBtn = document.querySelector(`.week-btn[data-week="${weekNumber}"]`);
+    if (activeBtn) {
+      activeBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-purple-100');
+      activeBtn.classList.add('bg-purple-600', 'text-white');
+    }
+  }
+
+  // 5) Highlight today + scroll to it
+  function highlightTodayAndScroll() {
+    const { dayInCycle } = dayToCycle(getCurrentProgramDay());
+
+    // Find today’s card
+    let todayEl = document.querySelector(`[data-day="${dayInCycle}"]`);
+    if (!todayEl) {
+      // fallback: match by heading text if data-day missing
+      todayEl = Array.from(document.querySelectorAll('.card-hover')).find(el => {
+        const h3 = el.querySelector('h3');
+        return h3 && new RegExp(`DAY\\s+${dayInCycle}\\b`, 'i').test(h3.textContent);
+      });
+    }
+    if (!todayEl) return;
+
+    // Add strong highlight ring
+    todayEl.classList.add('ring-4', 'ring-purple-500', 'ring-offset-2', 'ring-offset-white', 'shadow-xl', 'transition');
+    todayEl.setAttribute('id', 'today');
+
+    // Smooth scroll into view (center-ish)
+    setTimeout(() => {
+      document.getElementById('today')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 250);
+  }
+
+  // 6) Prevent “bouncing back”: lock week after we set it once
+  function lockWeekOnce() {
+    if (window.__superhumanWeekLocked) return true;
+    window.__superhumanWeekLocked = true;
+    return false;
+  }
+
+  // 7) Reload once per calendar day (after 3s) so “today” flips correctly at midnight
+  function scheduleOneReloadPerDay() {
+    try {
+      const key = 'sh2-last-reload-date';
+      const todayKey = toDateOnly(todayDate()).toISOString();
+      const last = localStorage.getItem(key);
+      if (last !== todayKey) {
+        setTimeout(() => {
+          localStorage.setItem(key, todayKey);
+          location.reload();
+        }, 3000);
+      }
+    } catch (_) {
+      // If storage blocked, still do a one-time best-effort reload
+      setTimeout(() => location.reload(), 3000);
+    }
+  }
+
+  // 8) Boot
+  function init() {
+    backfillDataDay();
+    applyLiveDates();
+
+    const current = getCurrentProgramDay();
+    const { dayInCycle } = dayToCycle(current);
+    const week = weekFromDay(dayInCycle);
+
+    // Only set the week if we haven't locked it yet
+    if (!lockWeekOnce()) {
+      showWeekSafe(week);
+    }
+
+    highlightTodayAndScroll();
+    scheduleOneReloadPerDay();
+
+    // Expose a stable showWeek that respects the lock (prevents bounce)
+    window.showWeek = function (n) {
+      showWeekSafe(n);
+      window.__superhumanWeekLocked = true; // manual selection also locks
+      // optional: scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97092a6372464883',t:'MTc1NTQzMzY0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
